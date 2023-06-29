@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import Mock from 'mockjs'
+import { MockData } from '../constants'
 
 /* 生成全天数据(间隔 5 分钟) */
 function generateAllDayData() {
@@ -13,32 +14,26 @@ function generateAllDayData() {
   return data
 }
 
-type MockData = {
-  // 时间
-  time: Date
-  // 线图数据
-  lineData: number
-  // 柱状图数据
-  barData: number
-  // 散点图数据
-  scatterData: number
-}
-
 const useMockData = () => {
   const [data, setData] = useState<MockData[]>([])
+  const [loading, setLoading] = useState(false)
 
   useEffect(() => {
-    const timeSeries = generateAllDayData()
-    const mockData = timeSeries.map(time => ({
-      time,
-      lineData: Mock.Random.float(10, 100),
-      barData: Mock.Random.integer(10, 100),
-      scatterData: Mock.Random.integer(10, 100),
-    }))
-    setData(mockData)
+    setLoading(true)
+    setTimeout(() => {
+      const timeSeries = generateAllDayData()
+      const mockData = timeSeries.map(time => ({
+        time,
+        lineData: Mock.Random.float(10, 100),
+        barData: Mock.Random.integer(10, 100),
+        scatterData: Mock.Random.integer(10, 100),
+      }))
+      setData(mockData)
+      setLoading(false)
+    }, 2000)
   }, [])
 
-  return data
+  return { data, loading }
 }
 
 export default useMockData

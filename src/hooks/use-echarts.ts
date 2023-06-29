@@ -10,12 +10,15 @@ interface EchartsProps {
   style?: React.CSSProperties
   // 用于将多个图表绑定在一起，以达到联动的效果
   group?: string
+  // 是否显示加载动画
+  loading?: boolean
 }
 
 const useEcharts = ({
   option,
-  style = { width: '100%', height: '400px' },
+  style = { width: '100%', height: '300px' },
   group,
+  loading = false,
 }: EchartsProps) => {
   // 图表容器的引用
   const containerRef = useRef<HTMLDivElement | null>(null)
@@ -63,6 +66,16 @@ const useEcharts = ({
   useEffect(() => {
     resizeEcharts()
   }, [size])
+
+  useEffect(() => {
+    if (chartRef.current) {
+      if (loading) {
+        chartRef.current.showLoading()
+      } else {
+        chartRef.current.hideLoading()
+      }
+    }
+  }, [loading])
 
   // 返回图表容器的引用和样式
   return { ref: containerRef, style }
