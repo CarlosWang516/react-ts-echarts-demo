@@ -36,6 +36,9 @@ devDependencies:
   '@vitejs/plugin-react-swc':
     specifier: ^3.0.0
     version: 3.0.0(vite@4.3.9)
+  dayjs:
+    specifier: ^1.11.8
+    version: 1.11.8
   eslint:
     specifier: ^8.38.0
     version: 8.38.0
@@ -779,7 +782,6 @@ packages:
 
   /dayjs@1.11.8:
     resolution: {integrity: sha512-LcgxzFoWMEPO7ggRv1Y2N31hUf2R0Vj7fuy/m+Bg1K8rr+KAs1AEy4y9jd5DXe8pbHgX+srkHNS7TH6Q6ZhYeQ==}
-    dev: false
 
   /debug@4.3.4:
     resolution: {integrity: sha512-PRWFHuSU3eDtQJPvnNY7Jcket1j0t5OuOsFzPPzsekD52Zl8qUfFIPEiswXqIvHWGVHOgX+7G/vCNNhehwxfkQ==}
