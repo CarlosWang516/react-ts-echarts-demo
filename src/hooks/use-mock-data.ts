@@ -14,6 +14,16 @@ function generateAllDayData() {
   return data
 }
 
+export function getMockData() {
+  const timeSeries = generateAllDayData()
+  return timeSeries.map(time => ({
+    time,
+    lineData: Mock.Random.float(10, 100),
+    barData: Mock.Random.integer(10, 100),
+    scatterData: Mock.Random.integer(10, 100),
+  }))
+}
+
 const useMockData = () => {
   const [data, setData] = useState<MockData[]>([])
   const [loading, setLoading] = useState(false)
@@ -21,13 +31,7 @@ const useMockData = () => {
   useEffect(() => {
     setLoading(true)
     setTimeout(() => {
-      const timeSeries = generateAllDayData()
-      const mockData = timeSeries.map(time => ({
-        time,
-        lineData: Mock.Random.float(10, 100),
-        barData: Mock.Random.integer(10, 100),
-        scatterData: Mock.Random.integer(10, 100),
-      }))
+      const mockData = getMockData()
       setData(mockData)
       setLoading(false)
     }, 2000)
